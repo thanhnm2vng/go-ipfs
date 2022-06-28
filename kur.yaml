@@ -76,11 +76,11 @@ spec:
         #       name: "go-ipfs-config-b1xy"
         ports:
         - containerPort: 4001
-          name: port1
+          name: swarm
         - containerPort: 5001
-          name: port1
+          name: api
         - containerPort: 8080
-          name: port1
+          name: gateway
         volumeMounts:
         - name: db
           mountPath: /data/ipfs
