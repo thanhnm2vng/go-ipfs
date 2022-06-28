@@ -1,0 +1,14 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >-
+        docker pull
+        gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:$_PRE_COMMIT_SHA
+        || exit 0
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build','-f','./Dockerfile', '-t', 'gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:latest', '.',"--cache-from","gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:latest"]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:latest']
+options:
+  logging: CLOUD_LOGGING_ONLY
