@@ -1,10 +1,7 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      - "sh"
-      - '-c'
-      - |
-        docker pull gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:latest || exit 0
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: 'bash'
+    args: ['-c', 'gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:latest || exit 0']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build','-f','./Dockerfile', '-t', 'gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:latest', '.',"--cache-from","gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:latest"]
   - name: 'gcr.io/cloud-builders/docker'
