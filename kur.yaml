@@ -1,0 +1,84 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-ipfs-all
+  namespace: "ipfs"
+spec:
+  #type: ClusterIP
+  # Uncomment the below line to create a Headless Service
+  clusterIP: None
+  selector:
+    proj: "go-ipfs"
+  ports:
+  - protocol: TCP
+    port: 9094
+    targetPort: 9094
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+    name: "go-ipfs"
+    namespace: "ipfs"
+spec:
+  selector:
+    matchLabels:
+      app: "go-ipfs"
+      proj: "go-ipfs"
+  serviceName: "go-ipfs-all"
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: "go-ipfs"
+        proj: "go-ipfs"
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: go-ipfs
+        image: gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:latest
+        readinessProbe:
+          tcpSocket:
+            port: 9094
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        # resources:
+        #   requests:
+        #     memory: "1Gi"
+        #     #cpu: "250m"
+        #   limits:
+        #     memory: "1Gi"
+        #     #cpu: "500m"
+        # env:
+        # - name: "go-ipfs_ZOOKEEPER_CONNECT"
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       key: "go-ipfs_ZOOKEEPER_CONNECT"
+        #       name: "go-ipfs-config-b1xy"
+        # - name: "go-ipfs_ADVERTISED_PORT"
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       key: "go-ipfs_ADVERTISED_PORT"
+        #       name: "go-ipfs-config-b1xy"
+        # - name: "ES_JAVA_OPTS"
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       key: "ES_JAVA_OPTS"
+        #       name: "go-ipfs-config-b1xy"
+        ports:
+        - containerPort: 9094
+          name: port1
+        volumeMounts:
+        - name: db
+          mountPath: /data/ipfs
+      nodeSelector:
+        #<labelname>:value
+        cloud.google.com/gke-nodepool: storage
+  volumeClaimTemplates:
+  - metadata:
+      name: db
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
