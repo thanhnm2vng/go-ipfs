@@ -12,8 +12,17 @@ spec:
     proj: "go-ipfs"
   ports:
   - protocol: TCP
-    port: 9094
-    targetPort: 9094
+    port: 4001
+    targetPort: 4001
+    name: swarm 
+  - protocol: TCP
+    port: 5001
+    targetPort: 5001
+    name: api 
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    name: gateway 
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -66,7 +75,11 @@ spec:
         #       key: "ES_JAVA_OPTS"
         #       name: "go-ipfs-config-b1xy"
         ports:
-        - containerPort: 9094
+        - containerPort: 4001
+          name: port1
+        - containerPort: 5001
+          name: port1
+        - containerPort: 8080
           name: port1
         volumeMounts:
         - name: db
