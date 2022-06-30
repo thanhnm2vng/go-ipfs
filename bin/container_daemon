@@ -61,9 +61,11 @@ ipfs config --json Addresses.API '["/ip4/0.0.0.0/tcp/5001"]'
 
 ipfs bootstrap rm --all
 mkdir -p /data/info/bootstrap/
-#myid=`ipfs id -f="/dns4/\`hostname -f\`/tcp/4001/p2p/<id>"`
-myid=`ipfs id -f="/dnsaddr/\`hostname -f\`/p2p/<id>"`
+mkdir -p /data/info/bootstrap/all/
+myid=`ipfs id -f="/dns4/\`hostname -f\`/tcp/4001/p2p/<id>"`
+#myid=`ipfs id -f="/dnsaddr/\`hostname -f\`/p2p/<id>"`
 myho=`hostname -f`
+echo "" > /data/info/bootstrap/all/${myho}
 ( cat /data/info/bootstrap/ho &&  nc -z `cat /data/info/bootstrap/ho` 4001 ) || ( echo $myho > /data/info/bootstrap/ho;echo $myid > /data/info/bootstrap/id )
 
 if [ "$myho" = "`cat /data/info/bootstrap/ho`" ]
@@ -72,4 +74,9 @@ then
 else
     ipfs bootstrap add `cat /data/info/bootstrap/id`
 fi
+
+# for i in `ls /data/info/bootstrap/all/ | grep -v ${myho}`
+# do
+#     ipfs bootstrap add $i
+# done
 exec ipfs "$@"
