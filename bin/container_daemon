@@ -66,7 +66,7 @@ myid=`ipfs id -f="/dns4/\`hostname -f\`/tcp/4001/p2p/<id>"`
 #myid=`ipfs id -f="/dnsaddr/\`hostname -f\`/p2p/<id>"`
 myho=`hostname -f`
 echo "$myid" > /data/info/bootstrap/all/${myho}
-( cat /data/info/bootstrap/ho &&  nc -z `cat /data/info/bootstrap/ho` 4001 ) || ( echo $myho > /data/info/bootstrap/ho;echo $myid > /data/info/bootstrap/id )
+#( cat /data/info/bootstrap/ho &&  nc -z `cat /data/info/bootstrap/ho` 4001 ) || ( echo $myho > /data/info/bootstrap/ho;echo $myid > /data/info/bootstrap/id )
 
 # if [ "$myho" = "`cat /data/info/bootstrap/ho`" ]
 # then
@@ -74,9 +74,9 @@ echo "$myid" > /data/info/bootstrap/all/${myho}
 # else
 #     ipfs bootstrap add `cat /data/info/bootstrap/id`
 # fi
-
-for i in `ls /data/info/bootstrap/all/ | grep -v ${myho}`
-do
+#| grep -v ${myho}
+for i in `ls /data/info/bootstrap/all/ `
+do  
     ipfs bootstrap add `cat /data/info/bootstrap/all/$i`
 done
 exec ipfs "$@"
