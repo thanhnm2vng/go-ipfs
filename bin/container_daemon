@@ -58,7 +58,8 @@ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
 ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "POST"]'
 ipfs bootstrap rm --all
 mkdir -p /data/info/bootstrap/
-myid=`ipfs id -f="/dns4/\`hostname -f\`/tcp/4001/p2p/<id>"`
+#myid=`ipfs id -f="/dns4/\`hostname -f\`/tcp/4001/p2p/<id>"`
+myid=`ipfs id -f="/dnsaddr/\`hostname -f\`/p2p/<id>"`
 myho=`hostname -f`
 ( cat /data/info/bootstrap/ho &&  nc -z `cat /data/info/bootstrap/ho` 4001 ) || ( echo $myho > /data/info/bootstrap/ho;echo $myid > /data/info/bootstrap/id )
 if [ "$myho" = "`cat /data/info/bootstrap/ho`" ]
