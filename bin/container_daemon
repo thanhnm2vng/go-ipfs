@@ -55,7 +55,7 @@ find /container-init.d -maxdepth 1 -type f -iname '*.sh' -print0 | sort -z | xar
 # ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "POST"]'
 
 ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
-ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "POST"]'
+ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["*"]'
 ipfs config --json Addresses.Gateway '["/ip4/0.0.0.0/tcp/8080"]'
 ipfs config --json Addresses.API '["/ip4/0.0.0.0/tcp/5001"]'
 
