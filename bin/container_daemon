@@ -62,5 +62,5 @@ myid=`ipfs id -f="/dns4/\`hostname -f\`/tcp/4001/p2p/<id>"`
 myho=`hostname -f`
 ( cat /data/info/bootstrap/ho &&  nc -z `cat /data/info/bootstrap/ho` 4001 ) || ( echo $myho > /data/info/bootstrap/ho;echo $myid > /data/info/bootstrap/id )
 ipfs bootstrap add `cat /data/info/bootstrap/id`
-
+export IPFS_SWARM_KEY=`cat /usr/local/bin/swarm.key`
 exec ipfs "$@"
