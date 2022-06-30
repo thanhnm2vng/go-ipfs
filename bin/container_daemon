@@ -70,4 +70,4 @@ myho=`hostname -f`
 #     ipfs bootstrap add `cat /data/info/bootstrap/id`
 # fi
 ipfs bootstrap add `cat /data/info/bootstrap/id`
-exec ipfs "$@"
+exec ipfs --debug "$@"
