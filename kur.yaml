@@ -101,7 +101,7 @@ spec:
       app: "go-ipfs"
       proj: "go-ipfs"
   serviceName: "go-ipfs-all"
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
