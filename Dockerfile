@@ -21,6 +21,9 @@ COPY . $SRC_DIR
 # e.g. docker build --build-arg IPFS_PLUGINS="foo bar baz"
 ARG IPFS_PLUGINS
 
+#RUN cd $SRC_DIR && go get github.com/Kubuxu/go-ipfs-swarm-key-gen/ipfs-swarm-key-gen && mkdir .ipfs && find / -iname "ipfs-swarm-key-gen"
+#./bin/ipfs-swarm-key-gen > .ipfs/swarm.key
+RUN cd $SRC_DIR && mkdir .ipfs && od  -vN 32 -An -tx1 /dev/urandom | tr -d ' \n' > .ipfs/swarm.key
 # Build the thing.
 # Also: fix getting HEAD commit hash via git rev-parse.
 RUN cd $SRC_DIR \
@@ -45,8 +48,8 @@ RUN set -eux; \
   && cd /tmp \
   && wget -q -O tini https://github.com/krallin/tini/releases/download/$TINI_VERSION/$tiniArch \
   && chmod +x tini
-# RUN go get -u github.com/Kubuxu/go-ipfs-swarm-key-gen/ipfs-swarm-key-gen
-# RUN ipfs-swarm-key-gen > .ipfs/swarm.key
+
+
 # Now comes the actual target image, which aims to be as small as possible.
 FROM busybox:1.31.1-glibc
 LABEL maintainer="Steven Allen <steven@stebalien.com>"
@@ -56,6 +59,7 @@ ENV SRC_DIR /go-ipfs
 COPY --from=0 $SRC_DIR/cmd/ipfs/ipfs /usr/local/bin/ipfs
 COPY --from=0 $SRC_DIR/bin/container_daemon /usr/local/bin/start_ipfs
 COPY --from=0 $SRC_DIR/bin/container_init_run /usr/local/bin/container_init_run
+COPY --from=0 $SRC_DIR/.ipfs/swarm.key /usr/local/bin/swarm.key
 COPY --from=0 /tmp/su-exec/su-exec-static /sbin/su-exec
 COPY --from=0 /tmp/tini /sbin/tini
 COPY --from=0 /bin/fusermount /usr/local/bin/fusermount

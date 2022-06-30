@@ -150,6 +150,13 @@ spec:
         volumeMounts:
         - name: db
           mountPath: /data/ipfs
+        - name: info
+          mountPath: /data/info
+      volumes:
+      - name: info
+        persistentVolumeClaim:
+          claimName: fileserver-claim
+          readOnly: false
       nodeSelector:
         #<labelname>:value
         cloud.google.com/gke-nodepool: storage

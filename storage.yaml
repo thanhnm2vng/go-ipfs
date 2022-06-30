@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: fileserverforipfs
+spec:
+  capacity:
+    storage: 1T
+  accessModes:
+  - ReadWriteMany
+  nfs:
+    path: /testfileshare
+    server: 10.112.4.154
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fileserver-claim
+  namespace: "ipfs"
+spec:
+  # Specify "" as the storageClassName so it matches the PersistentVolume's StorageClass.
+  # A nil storageClassName value uses the default StorageClass. For details, see
+  # https://kubernetes.io/docs/concepts/storage/persistent-volumes/#class-1
+  accessModes:
+  - ReadWriteMany
+  storageClassName: ""
+  volumeName: fileserverforipfs
+  resources:
+    requests:
+      storage: 100M
+---
+
+---
