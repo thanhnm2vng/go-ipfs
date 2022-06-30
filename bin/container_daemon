@@ -77,6 +77,6 @@ echo "" > /data/info/bootstrap/all/${myho}
 
 for i in `ls /data/info/bootstrap/all/ | grep -v ${myho}`
 do
-    ipfs bootstrap add $i
+    ipfs bootstrap add `ipfs id -f="/dns4/$i/tcp/4001/p2p/<id>"`
 done
 exec ipfs "$@"
