@@ -63,10 +63,10 @@ myid=`ipfs id -f="/dnsaddr/\`hostname -f\`/p2p/<id>"`
 myho=`hostname -f`
 ( cat /data/info/bootstrap/ho &&  nc -z `cat /data/info/bootstrap/ho` 4001 ) || ( echo $myho > /data/info/bootstrap/ho;echo $myid > /data/info/bootstrap/id )
 
-#if [ "$myho" = "`cat /data/info/bootstrap/ho`" ]
-#then
+if [ "$myho" = "`cat /data/info/bootstrap/ho`" ]
+then
     echo ""
-#else
+else
     ipfs bootstrap add `cat /data/info/bootstrap/id`
-#fi
+fi
 exec ipfs "$@"
