@@ -21,9 +21,6 @@ COPY . $SRC_DIR
 # e.g. docker build --build-arg IPFS_PLUGINS="foo bar baz"
 ARG IPFS_PLUGINS
 
-#RUN cd $SRC_DIR && go get github.com/Kubuxu/go-ipfs-swarm-key-gen/ipfs-swarm-key-gen && mkdir .ipfs && find / -iname "ipfs-swarm-key-gen"
-#./bin/ipfs-swarm-key-gen > .ipfs/swarm.key
-RUN cd $SRC_DIR && mkdir .ipfs && od  -vN 32 -An -tx1 /dev/urandom | tr -d ' \n' > .ipfs/swarm.key
 # Build the thing.
 # Also: fix getting HEAD commit hash via git rev-parse.
 RUN cd $SRC_DIR \
