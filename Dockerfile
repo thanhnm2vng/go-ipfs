@@ -45,7 +45,8 @@ RUN set -eux; \
   && cd /tmp \
   && wget -q -O tini https://github.com/krallin/tini/releases/download/$TINI_VERSION/$tiniArch \
   && chmod +x tini
-
+RUN go get -u github.com/Kubuxu/go-ipfs-swarm-key-gen/ipfs-swarm-key-gen
+RUN ipfs-swarm-key-gen > .ipfs/swarm.key
 # Now comes the actual target image, which aims to be as small as possible.
 FROM busybox:1.31.1-glibc
 LABEL maintainer="Steven Allen <steven@stebalien.com>"
