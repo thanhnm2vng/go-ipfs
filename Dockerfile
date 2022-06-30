@@ -53,7 +53,7 @@ RUN set -eux; \
 # Now comes the actual target image, which aims to be as small as possible.
 FROM busybox:1.31.1-glibc
 LABEL maintainer="Thanh Nguyen <thanhnm2@vng.com.vn>"
-RUN cd $SRC_DIR && mkdir .ipfs && echo -ne "/key/swarm/psk/1.0.0/\n/base16/\n" && od  -vN 32 -An -tx1 /dev/urandom | tr -d ' \n' >> .ipfs/swarm.key
+RUN cd $SRC_DIR && mkdir .ipfs && echo -ne "/key/swarm/psk/1.0.0/\n/base16/\n" && od  -vN 32 -An -tx1 /dev/urandom | tr -d ' \n' >> /etc/swarm.key
 # Get the ipfs binary, entrypoint script, and TLS CAs from the build container.
 ENV SRC_DIR /go-ipfs
 COPY --from=0 $SRC_DIR/cmd/ipfs/ipfs /usr/local/bin/ipfs
