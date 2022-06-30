@@ -23,72 +23,72 @@ spec:
     port: 8080
     targetPort: 8080
     name: gateway 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: go-ipfs-publish-0
-  namespace: "ipfs"
-spec:
-  type: LoadBalancer
-  # Uncomment the below line to create a Headless Service
-  #clusterIP: None
-  selector:
-    proj: "go-ipfs"
-    statefulset.kubernetes.io/pod-name: "go-ipfs-0"
-  ports:
-  - protocol: TCP
-    port: 5001
-    targetPort: 5001
-    name: api 
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
-    name: gateway 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: go-ipfs-publish-1
-  namespace: "ipfs"
-spec:
-  type: LoadBalancer
-  # Uncomment the below line to create a Headless Service
-  #clusterIP: None
-  selector:
-    proj: "go-ipfs"
-    statefulset.kubernetes.io/pod-name: "go-ipfs-1"
-  ports:
-  - protocol: TCP
-    port: 5001
-    targetPort: 5001
-    name: api 
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
-    name: gateway 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: go-ipfs-publish-2
-  namespace: "ipfs"
-spec:
-  type: LoadBalancer
-  # Uncomment the below line to create a Headless Service
-  #clusterIP: None
-  selector:
-    proj: "go-ipfs"
-    statefulset.kubernetes.io/pod-name: "go-ipfs-2"
-  ports:
-  - protocol: TCP
-    port: 5001
-    targetPort: 5001
-    name: api 
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
-    name: gateway 
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: go-ipfs-publish-0
+#   namespace: "ipfs"
+# spec:
+#   type: LoadBalancer
+#   # Uncomment the below line to create a Headless Service
+#   #clusterIP: None
+#   selector:
+#     proj: "go-ipfs"
+#     statefulset.kubernetes.io/pod-name: "go-ipfs-0"
+#   ports:
+#   - protocol: TCP
+#     port: 5001
+#     targetPort: 5001
+#     name: api 
+#   - protocol: TCP
+#     port: 8080
+#     targetPort: 8080
+#     name: gateway 
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: go-ipfs-publish-1
+#   namespace: "ipfs"
+# spec:
+#   type: LoadBalancer
+#   # Uncomment the below line to create a Headless Service
+#   #clusterIP: None
+#   selector:
+#     proj: "go-ipfs"
+#     statefulset.kubernetes.io/pod-name: "go-ipfs-1"
+#   ports:
+#   - protocol: TCP
+#     port: 5001
+#     targetPort: 5001
+#     name: api 
+#   - protocol: TCP
+#     port: 8080
+#     targetPort: 8080
+#     name: gateway 
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: go-ipfs-publish-2
+#   namespace: "ipfs"
+# spec:
+#   type: LoadBalancer
+#   # Uncomment the below line to create a Headless Service
+#   #clusterIP: None
+#   selector:
+#     proj: "go-ipfs"
+#     statefulset.kubernetes.io/pod-name: "go-ipfs-2"
+#   ports:
+#   - protocol: TCP
+#     port: 5001
+#     targetPort: 5001
+#     name: api 
+#   - protocol: TCP
+#     port: 8080
+#     targetPort: 8080
+#     name: gateway 
 ---
 apiVersion: apps/v1
 kind: StatefulSet
