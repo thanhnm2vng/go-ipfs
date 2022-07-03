@@ -30,7 +30,7 @@ metadata:
   name: go-ipfs-all-internal
   namespace: "ipfs"
 spec:
-  #type: ClusterIP
+  type: ClusterIP
   # Uncomment the below line to create a Headless Service
   clusterIP: None
   selector:
