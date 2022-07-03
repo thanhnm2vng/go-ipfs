@@ -27,6 +27,31 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: go-ipfs-all-internal
+  namespace: "ipfs"
+spec:
+  #type: ClusterIP
+  # Uncomment the below line to create a Headless Service
+  clusterIP: None
+  selector:
+    proj: "go-ipfs"
+  ports:
+  - protocol: TCP
+    port: 4001
+    targetPort: 4001
+    name: swarm 
+  - protocol: TCP
+    port: 5001
+    targetPort: 5001
+    name: api 
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    name: gateway 
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: go-ipfs-publish-0
   namespace: "ipfs"
 spec:
