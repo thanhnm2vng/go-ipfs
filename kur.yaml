@@ -32,7 +32,7 @@ metadata:
 spec:
   type: ClusterIP
   # Uncomment the below line to create a Headless Service
-  clusterIP: None
+  #clusterIP: None
   selector:
     proj: "go-ipfs"
   ports:
