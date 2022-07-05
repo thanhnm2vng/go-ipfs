@@ -220,29 +220,6 @@ spec:
             port: 5001
           initialDelaySeconds: 5
           periodSeconds: 10
-        # resources:
-        #   requests:
-        #     memory: "1Gi"
-        #     #cpu: "250m"
-        #   limits:
-        #     memory: "1Gi"
-        #     #cpu: "500m"
-        # env:
-        # - name: "go-ipfs_ZOOKEEPER_CONNECT"
-        #   valueFrom:
-        #     configMapKeyRef:
-        #       key: "go-ipfs_ZOOKEEPER_CONNECT"
-        #       name: "go-ipfs-config-b1xy"
-        # - name: "go-ipfs_ADVERTISED_PORT"
-        #   valueFrom:
-        #     configMapKeyRef:
-        #       key: "go-ipfs_ADVERTISED_PORT"
-        #       name: "go-ipfs-config-b1xy"
-        # - name: "ES_JAVA_OPTS"
-        #   valueFrom:
-        #     configMapKeyRef:
-        #       key: "ES_JAVA_OPTS"
-        #       name: "go-ipfs-config-b1xy"
         ports:
         - containerPort: 4001
           name: swarm
@@ -253,6 +230,23 @@ spec:
         volumeMounts:
         - name: db
           mountPath: /data/ipfs
+        - name: info
+          mountPath: /data/info
+      - name: ipfs-cluster
+        image: gcr.io/nft-platform-345404/github.com/vnggames/ipfs-cluster:latest
+        readinessProbe:
+          tcpSocket:
+            port: 9094
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        ports:
+        - containerPort: 9094
+          name: api
+        - containerPort: 9096
+          name: proxy
+        volumeMounts:
+        - name: dbcluster
+          mountPath: /data/ipfs-cluster
         - name: info
           mountPath: /data/info
       volumes:
@@ -266,6 +260,13 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: db
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+  - metadata:
+      name: dbcluster
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
