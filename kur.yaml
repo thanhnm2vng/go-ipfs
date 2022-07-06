@@ -272,3 +272,15 @@ spec:
       resources:
         requests:
           storage: 1Gi
+      nodeAffinity:
+        required:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: topology.kubernetes.io/zone
+              operator: In
+              values:
+              - asia-southeast1-a
+            - key: topology.kubernetes.io/region
+              operator: In
+              values:
+              - asia-southeast1
