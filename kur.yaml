@@ -199,6 +199,7 @@ metadata:
     name: "go-ipfs"
     namespace: "ipfs"
 spec:
+  
   selector:
     matchLabels:
       app: "go-ipfs"
@@ -257,6 +258,7 @@ spec:
       nodeSelector:
         #<labelname>:value
         cloud.google.com/gke-nodepool: storage
+  podManagementPolicy: Parallel
   volumeClaimTemplates:
   - metadata:
       name: db
