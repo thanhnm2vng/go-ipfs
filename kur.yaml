@@ -258,7 +258,7 @@ spec:
       nodeSelector:
         #<labelname>:value
         cloud.google.com/gke-nodepool: storage
-  podManagementPolicy: Parallel
+  #podManagementPolicy: Parallel
   volumeClaimTemplates:
   - metadata:
       name: db
