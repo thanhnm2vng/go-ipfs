@@ -234,7 +234,7 @@ spec:
         - name: info
           mountPath: /data/info
       - name: ipfs-cluster
-        image: gcr.io/nft-platform-345404/github.com/vnggames/ipfs-cluster:latest
+        image: gcr.io/nft-platform-345404/github.com/vnggames/nft-staging/ipfs-cluster:latest
         readinessProbe:
           tcpSocket:
             port: 9094
@@ -255,9 +255,6 @@ spec:
         persistentVolumeClaim:
           claimName: fileserver-claim
           readOnly: false
-      nodeSelector:
-        #<labelname>:value
-        cloud.google.com/gke-nodepool: storage
   #podManagementPolicy: Parallel
   volumeClaimTemplates:
   - metadata:
