@@ -38,6 +38,7 @@ spec:
 
   selector:
     proj: "go-ipfs"
+    statefulset.kubernetes.io/pod-name: "go-ipfs-0"
   ports:
   - protocol: TCP
     port: 4001
@@ -67,6 +68,7 @@ spec:
 
   selector:
     proj: "go-ipfs"
+    statefulset.kubernetes.io/pod-name: "go-ipfs-1"
   ports:
   - protocol: TCP
     port: 4001
@@ -95,7 +97,7 @@ spec:
   #clusterIP: None
   selector:
     proj: "go-ipfs"
-    statefulset.kubernetes.io/pod-name: ""
+    statefulset.kubernetes.io/pod-name: "go-ipfs-2"
   ports:
   - protocol: TCP
     port: 4001
