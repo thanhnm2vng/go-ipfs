@@ -234,14 +234,6 @@ spec:
     port: 4001
     targetPort: 4001
     name: swarm 
-  - protocol: TCP
-    port: 5001
-    targetPort: 5001
-    name: api 
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
-    name: gateway 
 ---
 apiVersion: v1
 kind: Service
@@ -260,14 +252,6 @@ spec:
     port: 4001
     targetPort: 4001
     name: swarm 
-  - protocol: TCP
-    port: 5001
-    targetPort: 5001
-    name: api 
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
-    name: gateway 
 ---
 apiVersion: v1
 kind: Service
@@ -286,14 +270,6 @@ spec:
     port: 4001
     targetPort: 4001
     name: swarm 
-  - protocol: TCP
-    port: 5001
-    targetPort: 5001
-    name: api 
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
-    name: gateway 
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -368,7 +344,7 @@ spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
-          storage: 1Gi
+          storage: 500Gi
   - metadata:
       name: dbcluster
     spec:
