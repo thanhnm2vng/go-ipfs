@@ -297,10 +297,9 @@ spec:
         image: gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:latest
         resources:
           requests:
-            cpu: "2000m"
+            cpu: "1000m"
             memory: "1536Mi"
           limits:
-            cpu: "3000m"
             memory: "2048Mi"
         readinessProbe:
           tcpSocket:
@@ -321,6 +320,12 @@ spec:
           mountPath: /data/info
       - name: ipfs-cluster
         image: gcr.io/nft-platform-345404/github.com/vnggames/ipfs-cluster:latest
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            memory: "512Mi"
         readinessProbe:
           tcpSocket:
             port: 9094
