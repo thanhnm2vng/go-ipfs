@@ -297,10 +297,10 @@ spec:
         image: gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:latest
         resources:
           requests:
-            cpu: "500m"
+            cpu: "250m"
             memory: "512Mi"
           limits:
-            cpu: "750m"
+            cpu: "300m"
             memory: "756Mi"
         readinessProbe:
           tcpSocket:
@@ -326,6 +326,7 @@ spec:
             cpu: "250m"
             memory: "128Mi"
           limits:
+            cpu: "300m"
             memory: "256Mi"
         readinessProbe:
           tcpSocket:
