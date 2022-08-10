@@ -295,12 +295,12 @@ spec:
       containers:
       - name: go-ipfs
         image: gcr.io/nft-platform-345404/github.com/vnggames/go-ipfs:latest
-        # resources:
-        #   requests:
-        #     cpu: "1000m"
-        #     memory: "1536Mi"
-        #   limits:
-        #     memory: "2048Mi"
+        resources:
+          requests:
+            cpu: "1000m"
+            memory: "1024Mi"
+          limits:
+            memory: "1536Mi"
         readinessProbe:
           tcpSocket:
             port: 5001
@@ -320,12 +320,12 @@ spec:
           mountPath: /data/info
       - name: ipfs-cluster
         image: gcr.io/nft-platform-345404/github.com/vnggames/ipfs-cluster:latest
-        # resources:
-        #   requests:
-        #     cpu: "250m"
-        #     memory: "256Mi"
-        #   limits:
-        #     memory: "512Mi"
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "128Mi"
+          limits:
+            memory: "256Mi"
         readinessProbe:
           tcpSocket:
             port: 9094
@@ -348,7 +348,7 @@ spec:
           readOnly: false
       nodeSelector:
         #<labelname>:value
-        cloud.google.com/gke-nodepool: storage
+        cloud.google.com/gke-nodepool: ipfs
   #podManagementPolicy: Parallel
   volumeClaimTemplates:
   - metadata:
